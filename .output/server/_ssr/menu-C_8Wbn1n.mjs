@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { u as useTranslation } from "../_libs/react-i18next.mjs";
-import { I as Info } from "../_libs/lucide-react.mjs";
+import { c as Info } from "../_libs/lucide-react.mjs";
 
 import "../_libs/i18next.mjs";
 import "../_libs/use-sync-external-store.mjs";

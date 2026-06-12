@@ -213,8 +213,8 @@ const PerformanceResourceTiming = globalThis.PerformanceResourceTiming || _Perfo
 const PerformanceObserver = globalThis.PerformanceObserver || _PerformanceObserver;
 const Performance = globalThis.Performance || _Performance;
 const PerformanceObserverEntryList = globalThis.PerformanceObserverEntryList || _PerformanceObserverEntryList;
-const performance = globalThis.performance && "addEventListener" in globalThis.performance ? globalThis.performance : new _Performance();
-globalThis.performance ||= performance;
+const performance$1 = globalThis.performance && "addEventListener" in globalThis.performance ? globalThis.performance : new _Performance();
+globalThis.performance ||= performance$1;
 globalThis.Performance ||= Performance;
 globalThis.PerformanceEntry ||= PerformanceEntry;
 globalThis.PerformanceMark ||= PerformanceMark;
@@ -222,6 +222,7 @@ globalThis.PerformanceMeasure ||= PerformanceMeasure;
 globalThis.PerformanceObserver ||= PerformanceObserver;
 globalThis.PerformanceObserverEntryList ||= PerformanceObserverEntryList;
 globalThis.PerformanceResourceTiming ||= PerformanceResourceTiming;
+const performance = globalThis.performance;
 const global = globalThis;
 const ChildProcess = /* @__PURE__ */ notImplementedClass("child_process.ChildProcess");
 const _forkChild = /* @__PURE__ */ notImplemented("child_process.ChildProcess");
@@ -259,5 +260,6 @@ const child_process$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
 const require$$0 = /* @__PURE__ */ getAugmentedNamespace(child_process$1);
 export {
   global as g,
+  performance as p,
   require$$0 as r
 };
