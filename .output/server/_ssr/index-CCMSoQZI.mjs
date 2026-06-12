@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { c as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-05IN_zjX.mjs";
+import { c as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-DvyiEV6R.mjs";
 
 import "../_libs/seroval.mjs";
 import { u as useTranslation } from "../_libs/react-i18next.mjs";
@@ -25,6 +25,7 @@ import "../_libs/srvx.mjs";
 
 
 
+import "../_libs/i18next.mjs";
 import "../_libs/use-sync-external-store.mjs";
 const heroImg = "/assets/hero-BN5tamU-.jpg";
 const aboutImg = "/assets/about-CyOri0Q-.jpg";

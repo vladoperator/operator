@@ -1,4 +1,5 @@
 import { r as reactExports } from "./react.mjs";
+import "./i18next.mjs";
 import { s as shimExports } from "./use-sync-external-store.mjs";
 const warn = (i18n, code, msg, rest) => {
   const args = [msg, {
@@ -97,9 +98,25 @@ let defaultOptions = {
   unescape,
   transDefaultProps: void 0
 };
+const setDefaults = (options = {}) => {
+  defaultOptions = {
+    ...defaultOptions,
+    ...options
+  };
+};
 const getDefaults = () => defaultOptions;
 let i18nInstance;
+const setI18n = (instance) => {
+  i18nInstance = instance;
+};
 const getI18n = () => i18nInstance;
+const initReactI18next = {
+  type: "3rdParty",
+  init(instance) {
+    setDefaults(instance.options.react);
+    setI18n(instance);
+  }
+};
 const I18nContext = reactExports.createContext();
 class ReportNamespaces {
   constructor() {
@@ -276,5 +293,6 @@ const useTranslation = (ns, props = {}) => {
   return ret;
 };
 export {
+  initReactI18next as i,
   useTranslation as u
 };

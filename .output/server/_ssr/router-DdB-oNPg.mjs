@@ -2,7 +2,9 @@ import { Q as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { c as createRouter, a as createRootRouteWithContext, u as useRouter, L as Link, O as Outlet, H as HeadContent, S as Scripts, b as createFileRoute, l as lazyRouteComponent } from "../_libs/tanstack__react-router.mjs";
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { u as useTranslation } from "../_libs/react-i18next.mjs";
+import { i as instance } from "../_libs/i18next.mjs";
+import { B as Browser } from "../_libs/i18next-browser-languagedetector+[...].mjs";
+import { u as useTranslation, i as initReactI18next } from "../_libs/react-i18next.mjs";
 import { G as Globe, C as ChevronDown, X, M as Menu, a as MapPin, b as Clock } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -36,11 +38,11 @@ function reportLovableError(error, context = {}) {
   );
 }
 function Navbar() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n: i18n2 } = useTranslation();
   const [open, setOpen] = reactExports.useState(false);
   const [langOpen, setLangOpen] = reactExports.useState(false);
-  const lang = (i18n.resolvedLanguage ?? "en").toUpperCase();
-  const setLang = (code) => i18n.changeLanguage(code.toLowerCase());
+  const lang = (i18n2.resolvedLanguage ?? "en").toUpperCase();
+  const setLang = (code) => i18n2.changeLanguage(code.toLowerCase());
   const links = [
     { label: t("nav.home"), to: "/", hash: void 0 },
     { label: t("nav.menu"), to: "/menu", hash: void 0 },
@@ -158,6 +160,257 @@ function Footer() {
     ] })
   ] }) });
 }
+const en = {
+  nav: {
+    home: "Home",
+    menu: "Menu",
+    reservations: "Reservations",
+    about: "About",
+    contact: "Contact"
+  },
+  hero: {
+    eyebrow: "Est. Chișinău",
+    title1: "A Premium Dining",
+    title2: "Experience",
+    subtitle: "Experience the finest culinary creations in an elegant atmosphere.",
+    cta: "Explore Menu"
+  },
+  reservations: {
+    eyebrow: "Bookings",
+    title: "Make a Reservation",
+    subtitle: "Reserve your table and let us prepare an unforgettable evening for you.",
+    name: "Name",
+    date: "Date",
+    time: "Time",
+    guests: "Guests",
+    submit: "Book Table",
+    confirmedTitle: "Reservation Confirmed!",
+    confirmedBody: "Thank you for choosing Crosta. We look forward to serving you.",
+    close: "Close"
+  },
+  about: {
+    eyebrow: "About",
+    title: "Our Story",
+    body: "At Crosta Kitchen Bakery, we believe in creating memorable dining experiences. We source the finest ingredients to bring you exquisite dishes crafted with passion and culinary expertise.",
+    body2: "From our artisan bakery to our seasonal kitchen, every plate tells a story rooted in craft, care, and respect for the produce we serve."
+  },
+  footer: {
+    eyebrow: "Contact",
+    title: "Visit Us",
+    address: "Chișinău MD, Strada Miron Costin 13/7, MD-2000",
+    hours: "Open Daily: 8:00 – 22:00",
+    rights: "All rights reserved.",
+    tagline: "Kitchen Bakery"
+  },
+  menu: {
+    eyebrow: "À la carte",
+    title: "Our Signature Menu",
+    subtitle: "Seasonal compositions from our kitchen and bakery, crafted with care from the finest ingredients.",
+    legendTitle: "Сноски / Условные обозначения",
+    legend: {
+      breakfast: "We are happy to serve breakfast from",
+      breakfastTime: "9:00 to 21:00",
+      main: "Main menu is served from",
+      mainTime: "12:00 to 23:00",
+      spicy: "spicy or piquant",
+      fish: "caution: fish bones",
+      garlic: "contains garlic",
+      slow: "preparation takes more than 25 minutes",
+      allergy: "If you have allergies or dietary preferences, please let us know."
+    },
+    sections: {
+      breakfasts: "Breakfasts",
+      appetizers: "Appetizers",
+      salads: "Salads",
+      soups: "Soups",
+      hot: "Hot Dishes with Side"
+    },
+    groups: {
+      egg: "Egg Dishes",
+      future: "Back to the Future",
+      favorites: "Your Favorites",
+      vegans: "For Vegans' Joy",
+      cheeses: "Farm Cheeses",
+      home: "Brought from Home",
+      bread: "With our fresh bread",
+      cool: "Summer and cool",
+      hit: "Always hit the spot"
+    }
+  }
+};
+const ro = {
+  nav: {
+    home: "Acasă",
+    menu: "Meniu",
+    reservations: "Rezervări",
+    about: "Despre",
+    contact: "Contact"
+  },
+  hero: {
+    eyebrow: "Fondat în Chișinău",
+    title1: "O Experiență Culinară",
+    title2: "Premium",
+    subtitle: "Descoperiți cele mai fine creații culinare într-o atmosferă elegantă.",
+    cta: "Vezi Meniul"
+  },
+  reservations: {
+    eyebrow: "Rezervări",
+    title: "Rezervați o Masă",
+    subtitle: "Rezervați-vă masa și lăsați-ne să vă pregătim o seară de neuitat.",
+    name: "Nume",
+    date: "Data",
+    time: "Ora",
+    guests: "Persoane",
+    submit: "Rezervă Masa",
+    confirmedTitle: "Rezervare Confirmată!",
+    confirmedBody: "Vă mulțumim că ați ales Crosta. Vă așteptăm cu drag.",
+    close: "Închide"
+  },
+  about: {
+    eyebrow: "Despre noi",
+    title: "Povestea Noastră",
+    body: "La Crosta Kitchen Bakery credem în crearea unor experiențe culinare memorabile. Folosim cele mai fine ingrediente pentru a vă oferi preparate rafinate, lucrate cu pasiune și măiestrie.",
+    body2: "De la brutăria noastră artizanală până la bucătăria de sezon, fiecare farfurie spune o poveste despre meșteșug, grijă și respect pentru produsele pe care le servim."
+  },
+  footer: {
+    eyebrow: "Contact",
+    title: "Vizitați-ne",
+    address: "Chișinău MD, Strada Miron Costin 13/7, MD-2000",
+    hours: "Deschis Zilnic: 8:00 – 22:00",
+    rights: "Toate drepturile rezervate.",
+    tagline: "Kitchen Bakery"
+  },
+  menu: {
+    eyebrow: "À la carte",
+    title: "Meniul Nostru de Autor",
+    subtitle: "Compoziții de sezon din bucătăria și brutăria noastră, lucrate cu grijă din cele mai fine ingrediente.",
+    legendTitle: "Note / Semne convenționale",
+    legend: {
+      breakfast: "Servim micul dejun între",
+      breakfastTime: "9:00 și 21:00",
+      main: "Meniul principal se servește între",
+      mainTime: "12:00 și 23:00",
+      spicy: "picant sau iute",
+      fish: "atenție: oase de pește",
+      garlic: "conține usturoi",
+      slow: "prepararea durează peste 25 de minute",
+      allergy: "Dacă aveți alergii sau preferințe alimentare, vă rugăm să ne anunțați."
+    },
+    sections: {
+      breakfasts: "Mic Dejun",
+      appetizers: "Aperitive",
+      salads: "Salate",
+      soups: "Supe",
+      hot: "Feluri Calde cu Garnitură"
+    },
+    groups: {
+      egg: "Preparate cu Ouă",
+      future: "Înapoi în Copilărie",
+      favorites: "Preferatele Voastre",
+      vegans: "Bucuria Veganilor",
+      cheeses: "Brânzeturi de Fermă",
+      home: "Aduse de Acasă",
+      bread: "Cu pâinea noastră proaspătă",
+      cool: "Vară și răcoritoare",
+      hit: "Mereu pe gustul tău"
+    }
+  }
+};
+const ru = {
+  nav: {
+    home: "Главная",
+    menu: "Меню",
+    reservations: "Бронирование",
+    about: "О нас",
+    contact: "Контакты"
+  },
+  hero: {
+    eyebrow: "Основано в Кишинёве",
+    title1: "Премиальный",
+    title2: "Ресторанный Опыт",
+    subtitle: "Откройте для себя изысканные кулинарные творения в элегантной атмосфере.",
+    cta: "Открыть Меню"
+  },
+  reservations: {
+    eyebrow: "Бронь",
+    title: "Забронировать Столик",
+    subtitle: "Забронируйте столик — мы подготовим для вас незабываемый вечер.",
+    name: "Имя",
+    date: "Дата",
+    time: "Время",
+    guests: "Гостей",
+    submit: "Забронировать",
+    confirmedTitle: "Бронирование Подтверждено!",
+    confirmedBody: "Благодарим, что выбрали Crosta. Мы будем рады вас видеть.",
+    close: "Закрыть"
+  },
+  about: {
+    eyebrow: "О нас",
+    title: "Наша История",
+    body: "В Crosta Kitchen Bakery мы создаём незабываемые гастрономические впечатления. Мы выбираем лучшие ингредиенты, чтобы подавать вам изысканные блюда, приготовленные со страстью и мастерством.",
+    body2: "От нашей пекарни до сезонной кухни — каждая тарелка рассказывает историю ремесла, заботы и уважения к продуктам."
+  },
+  footer: {
+    eyebrow: "Контакты",
+    title: "Найти Нас",
+    address: "Кишинёв, ул. Мирон Костин 13/7, MD-2000",
+    hours: "Ежедневно: 8:00 – 22:00",
+    rights: "Все права защищены.",
+    tagline: "Kitchen Bakery"
+  },
+  menu: {
+    eyebrow: "À la carte",
+    title: "Наше Фирменное Меню",
+    subtitle: "Сезонные блюда нашей кухни и пекарни, приготовленные с заботой из лучших ингредиентов.",
+    legendTitle: "Сноски / Условные обозначения",
+    legend: {
+      breakfast: "Завтраки подаются с",
+      breakfastTime: "9:00 до 21:00",
+      main: "Основное меню подаётся с",
+      mainTime: "12:00 до 23:00",
+      spicy: "острое или пикантное",
+      fish: "осторожно: рыбные кости",
+      garlic: "содержит чеснок",
+      slow: "приготовление занимает более 25 минут",
+      allergy: "Если у вас есть аллергии или особые предпочтения, пожалуйста, сообщите нам."
+    },
+    sections: {
+      breakfasts: "Завтраки",
+      appetizers: "Закуски",
+      salads: "Салаты",
+      soups: "Супы",
+      hot: "Горячие Блюда с Гарниром"
+    },
+    groups: {
+      egg: "Блюда из яиц",
+      future: "Назад в детство",
+      favorites: "Ваши любимые",
+      vegans: "Радость веганов",
+      cheeses: "Фермерские сыры",
+      home: "Принесённое из дома",
+      bread: "С нашим свежим хлебом",
+      cool: "Летние и прохладные",
+      hit: "Всегда в точку"
+    }
+  }
+};
+if (!instance.isInitialized) {
+  instance.use(Browser).use(initReactI18next).init({
+    resources: {
+      en: { translation: en },
+      ro: { translation: ro },
+      ru: { translation: ru }
+    },
+    fallbackLng: "en",
+    supportedLngs: ["en", "ro", "ru"],
+    interpolation: { escapeValue: false },
+    detection: {
+      order: ["localStorage", "navigator"],
+      caches: ["localStorage"],
+      lookupLocalStorage: "crosta-lang"
+    }
+  });
+}
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -272,7 +525,7 @@ const Route$1 = createFileRoute("/menu")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-Dm2UNlr0.mjs");
+const $$splitComponentImporter = () => import("./index-CCMSoQZI.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{
