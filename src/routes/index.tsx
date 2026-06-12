@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/about.jpg";
 import { sendReservation } from "../lib/api/reservation.functions";
+import { SplitText, Magnetic, GlowCard, PageWrapper } from "../components/AnimatedElements";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -64,18 +65,18 @@ function Index() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <>
+    <PageWrapper>
       {/* HERO */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0 z-0">
@@ -95,24 +96,34 @@ function Index() {
           animate="show"
           className="relative z-10 mx-auto max-w-5xl px-6 text-center text-cream pt-20"
         >
-          <motion.p variants={fadeUp} className="text-xs uppercase tracking-[0.4em] text-[var(--color-gold)] font-medium">
-            {t("hero.eyebrow")}
-          </motion.p>
-          <motion.h1 variants={fadeUp} className="mt-8 font-serif text-6xl leading-[1.05] tracking-tight sm:text-7xl md:text-8xl text-shadow-premium">
-            {t("hero.title1")}<br />
-            <span className="text-white/90">{t("hero.title2")}</span>
-          </motion.h1>
+          <motion.div variants={fadeUp}>
+            <p className="text-xs uppercase tracking-[0.4em] text-[var(--color-gold)] font-medium">
+              {t("hero.eyebrow")}
+            </p>
+          </motion.div>
+          
+          <h1 className="mt-8 font-serif text-6xl leading-[1.05] tracking-tight sm:text-7xl md:text-8xl text-shadow-premium">
+            <SplitText text={t("hero.title1")} type="words" delay={0.1} />
+            <br />
+            <span className="text-white/90">
+              <SplitText text={t("hero.title2")} type="words" delay={0.4} />
+            </span>
+          </h1>
+          
           <motion.p variants={fadeUp} className="mx-auto mt-8 max-w-2xl text-base text-cream/70 sm:text-lg font-light leading-relaxed">
             {t("hero.subtitle")}
           </motion.p>
-          <motion.div variants={fadeUp}>
-            <Link
-              to="/menu"
-              className="mt-12 inline-flex items-center gap-3 border border-[var(--color-gold)]/50 bg-black/20 backdrop-blur-md px-10 py-4 text-xs uppercase tracking-[0.25em] text-[var(--color-gold)] transition-all duration-500 hover:bg-[var(--color-gold)] hover:text-black hover:border-[var(--color-gold)] hover:shadow-[0_0_30px_rgba(202,138,4,0.3)] rounded-full group"
-            >
-              {t("hero.cta")}
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+          
+          <motion.div variants={fadeUp} className="mt-12">
+            <Magnetic>
+              <Link
+                to="/menu"
+                className="inline-flex items-center gap-3 border border-[var(--color-gold)]/50 bg-black/20 backdrop-blur-md px-10 py-4 text-xs uppercase tracking-[0.25em] text-[var(--color-gold)] transition-all duration-500 hover:bg-[var(--color-gold)] hover:text-black hover:border-[var(--color-gold)] hover:shadow-[0_0_30px_rgba(202,138,4,0.4)] rounded-full group cursor-pointer"
+              >
+                {t("hero.cta")}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </Magnetic>
           </motion.div>
         </motion.div>
 
@@ -146,9 +157,9 @@ function Index() {
             <motion.p variants={fadeUp} className="text-xs uppercase tracking-[0.3em] text-[var(--color-bronze)] font-medium">
               {t("reservations.eyebrow")}
             </motion.p>
-            <motion.h2 variants={fadeUp} className="mt-4 font-serif text-5xl sm:text-6xl tracking-tight">
-              {t("reservations.title")}
-            </motion.h2>
+            <h2 className="mt-4 font-serif text-5xl sm:text-6xl tracking-tight">
+              <SplitText text={t("reservations.title")} type="words" />
+            </h2>
             <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-xl text-sm text-muted-foreground/80 leading-relaxed font-light">
               {t("reservations.subtitle")}
             </motion.p>
@@ -223,16 +234,18 @@ function Index() {
             )}
             
             <div className="sm:col-span-2 mt-6">
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full relative overflow-hidden rounded-full bg-foreground px-8 py-5 text-xs font-medium uppercase tracking-[0.25em] text-background transition-all hover:bg-[var(--color-gold)] hover:text-black hover:shadow-[0_0_20px_rgba(202,138,4,0.3)] disabled:opacity-50 disabled:cursor-not-allowed group"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {submitting ? "Submitting..." : t("reservations.submit")}
-                  {!submitting && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
-                </span>
-              </button>
+              <Magnetic>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full relative overflow-hidden rounded-full bg-foreground px-8 py-5 text-xs font-medium uppercase tracking-[0.25em] text-background transition-all hover:bg-[var(--color-gold)] hover:text-black hover:shadow-[0_0_20px_rgba(202,138,4,0.4)] disabled:opacity-50 disabled:cursor-not-allowed group cursor-pointer"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {submitting ? "Submitting..." : t("reservations.submit")}
+                    {!submitting && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
+                  </span>
+                </button>
+              </Magnetic>
             </div>
           </motion.form>
         </div>
@@ -251,9 +264,9 @@ function Index() {
             <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.3em] text-[var(--color-gold)]">
               {t("about.eyebrow")}
             </motion.p>
-            <motion.h2 variants={fadeUp} className="mt-6 font-serif text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.1]">
-              {t("about.title")}
-            </motion.h2>
+            <h2 className="mt-6 font-serif text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.1]">
+              <SplitText text={t("about.title")} type="words" />
+            </h2>
             <motion.p variants={fadeUp} className="mt-8 text-base font-light leading-relaxed text-cream/70">
               {t("about.body")}
             </motion.p>
@@ -271,17 +284,19 @@ function Index() {
             className="relative"
           >
             <div className="absolute -inset-4 bg-gradient-to-tr from-[var(--color-gold)]/20 to-transparent blur-2xl opacity-50 rounded-[40px]"></div>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
-              <img
-                src={aboutImg}
-                alt="Artisan baker"
-                width={1280}
-                height={1280}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-1000 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            </div>
+            <GlowCard className="relative rounded-3xl">
+              <div className="aspect-[4/5] overflow-hidden">
+                <img
+                  src={aboutImg}
+                  alt="Artisan baker"
+                  width={1280}
+                  height={1280}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-1000 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </div>
+            </GlowCard>
           </motion.div>
         </div>
       </section>
@@ -298,7 +313,7 @@ function Index() {
           >
             <button
               onClick={closeModal}
-              className="absolute right-6 top-6 text-white/50 hover:text-white transition-colors"
+              className="absolute right-6 top-6 text-white/50 hover:text-white transition-colors cursor-pointer"
               aria-label={t("reservations.close")}
             >
               <X className="h-5 w-5" />
@@ -312,13 +327,13 @@ function Index() {
             </p>
             <button
               onClick={closeModal}
-              className="mt-10 inline-flex w-full justify-center rounded-full bg-[var(--color-gold)] px-8 py-4 text-xs font-medium uppercase tracking-[0.25em] text-black transition-all hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              className="mt-10 inline-flex w-full justify-center rounded-full bg-[var(--color-gold)] px-8 py-4 text-xs font-medium uppercase tracking-[0.25em] text-black transition-all hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer"
             >
               {t("reservations.close")}
             </button>
           </motion.div>
         </div>
       )}
-    </>
+    </PageWrapper>
   );
 }
