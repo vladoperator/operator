@@ -36,9 +36,9 @@ export function Navbar() {
         scrolled ? "top-4" : "top-6"
       }`}
     >
-      <div className={`mx-auto max-w-7xl rounded-2xl border transition-colors duration-500 glass-panel`}>
+      <div className={`mx-auto max-w-7xl rounded-2xl border transition-colors duration-500 bg-black/50 backdrop-blur-xl border border-white/10 shadow-2xl`}>
         <div className="flex items-center justify-between px-6 py-4 sm:px-8">
-          <Link to="/" className="font-serif text-xl tracking-wider text-foreground sm:text-2xl hover:opacity-80 transition-opacity">
+          <Link to="/" className="font-serif text-xl tracking-wider text-white sm:text-2xl hover:opacity-80 transition-opacity">
             Crosta<span className="text-[var(--color-gold)]"> · </span>Kitchen Bakery
           </Link>
 
@@ -48,7 +48,7 @@ export function Navbar() {
                 key={l.label}
                 to={l.to}
                 hash={l.hash}
-                className="relative text-xs uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:text-[var(--color-gold)] group"
+                className="relative text-xs uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-[var(--color-gold)] group"
               >
                 {l.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[var(--color-gold)] transition-all duration-300 group-hover:w-full"></span>
@@ -57,7 +57,7 @@ export function Navbar() {
             <div className="relative">
               <button
                 onClick={() => setLangOpen((v) => !v)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 px-4 py-2 text-xs uppercase tracking-[0.18em] text-foreground/80 backdrop-blur-sm transition-all hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] hover:bg-foreground/5"
+                className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 px-4 py-2 text-xs uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm transition-all hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] hover:bg-foreground/5"
               >
                 <Globe className="h-3.5 w-3.5" />
                 {lang}
@@ -91,7 +91,7 @@ export function Navbar() {
           </nav>
 
           <button
-            className="rounded-full p-2 text-foreground/80 hover:bg-foreground/5 hover:text-foreground lg:hidden transition-colors"
+            className="rounded-full p-2 text-white/80 hover:bg-foreground/5 hover:text-white lg:hidden transition-colors"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -114,7 +114,7 @@ export function Navbar() {
                     to={l.to}
                     hash={l.hash}
                     onClick={() => setOpen(false)}
-                    className="text-sm uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:text-[var(--color-gold)]"
+                    className="text-sm uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-[var(--color-gold)]"
                   >
                     {l.label}
                   </Link>
@@ -127,7 +127,7 @@ export function Navbar() {
                       className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.18em] transition-all ${
                         lang === code
                           ? "border-[var(--color-gold)] text-[var(--color-gold)] bg-[var(--color-gold)]/10"
-                          : "border-foreground/10 text-foreground/70 hover:border-foreground/30"
+                          : "border-foreground/10 text-white/70 hover:border-foreground/30"
                       }`}
                     >
                       {code}
