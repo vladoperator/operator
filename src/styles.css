@@ -106,6 +106,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -118,7 +119,7 @@
 /* Liquid Glass Utilities */
 @layer utilities {
   .glass-panel {
-    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl;
+    @apply bg-white/80 border border-black/5 shadow-2xl backdrop-blur-xl;
   }
   .dark .glass-panel {
     @apply bg-black/40 border-white/10;

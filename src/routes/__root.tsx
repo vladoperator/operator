@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import "../i18n";
+import { ThemeProvider } from "../hooks/use-theme";
 
 function NotFoundComponent() {
   return (
@@ -114,6 +115,19 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
       </head>
       <body>
         {children}
@@ -134,17 +148,19 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
-        <motion.div
-          className="fixed top-0 left-0 right-0 h-[2px] bg-[var(--color-gold)] origin-left z-[100]"
-          style={{ scaleX }}
-        />
-        <Navbar />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+      <ThemeProvider>
+        <div className="flex min-h-screen flex-col">
+          <motion.div
+            className="fixed top-0 left-0 right-0 h-[2px] bg-[var(--color-gold)] origin-left z-[100]"
+            style={{ scaleX }}
+          />
+          <Navbar />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

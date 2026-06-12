@@ -193,7 +193,7 @@ function MenuPage() {
                         <motion.li 
                           key={item.name.en} 
                           variants={fadeUp}
-                          className="group rounded-2xl p-4 transition-all duration-500 hover:bg-white/5 dark:hover:bg-white/[0.015] border border-transparent hover:border-border/30 hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
+                          className="group rounded-2xl p-4 transition-all duration-500 hover:bg-black/5 dark:hover:bg-white/[0.015] border border-transparent hover:border-border/30 hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
                         >
                           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
                             <div className="min-w-0">
